@@ -23,7 +23,7 @@ def load_data_from_spreadsheet():
 df = load_data_from_spreadsheet()
 
 # カテゴリと国の選択肢をセットアップ
-categories = df['Category'].unique()
+categories = ['IT', '製造者', '雑貨', 'エネルギー/パワー', 'ハイテク小売/電子商取引', 'IoT/センサー', '製造業', '情報技術', '家電', 'テクノロジー', 'ソフトウェア', '自動車メーカー', '環境', '小売業', '通信業', '健康']
 countries = df['Country'].unique()
 
 # Streamlitのセレクトボックスを使用してユーザーに選択させる
@@ -31,7 +31,7 @@ selected_category = st.selectbox('カテゴリを選択', categories)
 selected_country = st.selectbox('国を選択', countries)
 
 # データフレームをフィルタリング
-filtered_df = df[df['Category'].str.contains(selected_category) & (df['Country'] == selected_country)]
+filtered_df = df[df['Category'].str.contains(selected_category, na=False) & (df['Country'] == selected_country)]
 
 # 結果を表示
 st.write(filtered_df)
