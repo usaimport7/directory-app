@@ -6,6 +6,11 @@ import os
 
 # 環境変数からJSONキーファイルのパスを取得
 json_keyfile_path = os.getenv("JSON_KEYFILE_PATH")
+# Secretsから認証情報を読み込む
+service_account_info = json.loads(st.secrets["google_service_account"])
+scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+
+creds = ServiceAccountCredentials.from_json_keyfile_dict(service_account_info, scope)
 
 # Googleスプレッドシートの認証とデータの読み込み
 def load_data_from_spreadsheet():
